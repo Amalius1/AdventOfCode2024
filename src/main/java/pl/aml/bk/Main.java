@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import pl.aml.bk.aoc.current.Day02;
 import pl.aml.bk.aoc.current.Day03;
 import pl.aml.bk.aoc.current.Day04;
+import pl.aml.bk.aoc.current.Day05;
 
 @Slf4j
 public class Main {
@@ -12,7 +13,15 @@ public class Main {
     public static void main(String[] args) {
 //        day02();
 //        day03();
-        day04();
+//        day04();
+        day05();
+    }
+
+    private static void day05() {
+        Day05 day05 = new Day05();
+//        day05.part1();
+        day05.part2();
+
     }
 
     private static void day04() {
