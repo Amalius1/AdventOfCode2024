@@ -1,6 +1,7 @@
 package pl.aml.bk.aoc.current;
 
 import lombok.extern.slf4j.Slf4j;
+import pl.aml.bk.aoc.common.FailedToLoadResourceException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -108,7 +109,7 @@ public class Day05 {
             assert inputStream != null;
             return new String(inputStream.readAllBytes()).lines().toList();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FailedToLoadResourceException(e);
         }
     }
 
@@ -118,7 +119,7 @@ public class Day05 {
             return new String(inputStream.readAllBytes()).lines().collect(Collectors.toSet());
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FailedToLoadResourceException(e);
         }
     }
 

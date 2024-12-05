@@ -1,6 +1,7 @@
 package pl.aml.bk.aoc.current;
 
 import lombok.extern.slf4j.Slf4j;
+import pl.aml.bk.aoc.common.FailedToLoadResourceException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,7 +55,7 @@ public class Day02 {
                             .toArray(Integer[]::new))
                     .toList();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FailedToLoadResourceException(e);
         }
     }
 
