@@ -1,10 +1,13 @@
 package pl.aml.bk.aoc.current;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class Day05 {
 
     public void part1() {
@@ -17,7 +20,7 @@ public class Day05 {
             sum += Integer.parseInt(split[split.length / 2]);
         }
 
-        System.out.println(sum);
+        log.info("Sum of part 1: {}", sum);
     }
 
     public void part2() {
@@ -34,7 +37,8 @@ public class Day05 {
             sum += Integer.parseInt(rearranged[rearranged.length / 2]);
         }
 
-        System.out.println(sum);
+        log.info("Sum of part 2: {}", sum);
+
     }
 
     private void checkAndSwap(String[] rearranged, Set<String> rules) {

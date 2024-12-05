@@ -11,22 +11,33 @@ public class Main {
 
 
     public static void main(String[] args) {
-//        day02();
-//        day03();
-//        day04();
+        day02();
+        day03();
+        day04();
         day05();
     }
 
     private static void day05() {
         Day05 day05 = new Day05();
+        log.info("-".repeat(10) + " DAY 05 " + "-".repeat(10));
+        log.info("-".repeat(10) + " PART 1 " + "-".repeat(10));
         day05.part1();
+        log.info("-".repeat(10) + " PART 2 " + "-".repeat(10));
         day05.part2();
+        log.info("-".repeat(28));
+
 
     }
 
     private static void day04() {
         Day04 day04 = new Day04();
+        log.info("-".repeat(10) + " DAY 04 " + "-".repeat(10));
+        log.info("-".repeat(10) + " PART 1 " + "-".repeat(10));
+        day04.part1();
+        log.info("-".repeat(10) + " PART 2 " + "-".repeat(10));
         day04.part2();
+        log.info("-".repeat(28));
+
     }
 
     private static void day03() {

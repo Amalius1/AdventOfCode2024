@@ -34,7 +34,7 @@ public class Day04 {
                 }
             }
         }
-        System.out.println(counter);
+        log.info("Part 2 total count: {}", counter);
     }
 
     public void part1() {
@@ -57,8 +57,8 @@ public class Day04 {
 
 
         totalCount = rowsCount + colsCount + botLeft + diagCount0120Bot;
+        log.info("Part 1 total count: {}", totalCount);
 
-        System.out.println(totalCount);
 
     }
 
