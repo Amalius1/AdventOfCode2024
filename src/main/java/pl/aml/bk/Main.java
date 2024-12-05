@@ -19,7 +19,7 @@ public class Main {
 
     private static void day05() {
         Day05 day05 = new Day05();
-//        day05.part1();
+        day05.part1();
         day05.part2();
 
     }
