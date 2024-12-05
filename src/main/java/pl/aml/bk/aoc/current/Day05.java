@@ -7,49 +7,6 @@ import java.util.stream.Collectors;
 
 public class Day05 {
 
-    public void part2() {
-        Set<String> rules = loadRules("/inputs/day05_rules.txt");
-        List<String> allManuals = loadManuals("/inputs/day05_manuals.txt");
-        List<String> invalidManuals = sortManualsByValidity(rules, allManuals).invalidManuals;
-        List<String[]> manuals = parseManualsToArrays(invalidManuals);
-        int sum = 0;
-        for (var manual : manuals) {
-            String[] rearranged = Arrays.copyOf(manual, manual.length);
-            boolean isManualValid = false;
-            do {
-                for (int i = 0; i < rearranged.length; i++) {
-                    String currentPage = rearranged[i];
-                    boolean swapped = false;
-                    if (rules.stream().anyMatch(x -> x.startsWith(currentPage))) {
-                        for (int j = 0; j < rearranged.length; j++) {
-                            String checkedPage = rearranged[j];
-                            if (rules.contains(currentPage + "|" + checkedPage) && i > j) {
-                                // swap
-                                swapPlaces(rearranged, i, j);
-                                swapped = true;
-                                break;
-                            }
-                        }
-                        if (swapped) {
-                            break;
-                        }
-                    }
-                }
-                isManualValid = checkIfManualIsValid(rules, rearranged);
-            } while (!isManualValid);
-            sum += Integer.parseInt(rearranged[rearranged.length / 2]);
-
-        }
-
-        System.out.println(sum);
-    }
-
-    private void swapPlaces(String[] array, int i, int j) {
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-
     public void part1() {
         Set<String> rules = loadRules("/inputs/day05_rules.txt");
         List<String> pages = loadManuals("/inputs/day05_manuals.txt");
@@ -61,6 +18,50 @@ public class Day05 {
         }
 
         System.out.println(sum);
+    }
+
+    public void part2() {
+        Set<String> rules = loadRules("/inputs/day05_rules.txt");
+        List<String> allManuals = loadManuals("/inputs/day05_manuals.txt");
+        List<String> invalidManuals = sortManualsByValidity(rules, allManuals).invalidManuals;
+        List<String[]> manuals = parseManualsToArrays(invalidManuals);
+        int sum = 0;
+        for (var manual : manuals) {
+            String[] rearranged = Arrays.copyOf(manual, manual.length);
+            do {
+                checkAndSwap(rearranged, rules);
+            } while (!checkIfManualIsValid(rules, rearranged));
+            sum += Integer.parseInt(rearranged[rearranged.length / 2]);
+        }
+
+        System.out.println(sum);
+    }
+
+    private void checkAndSwap(String[] rearranged, Set<String> rules) {
+        for (int i = 0; i < rearranged.length; i++) {
+            String currentPage = rearranged[i];
+            boolean swapped = false;
+            if (rules.stream().anyMatch(x -> x.startsWith(currentPage))) {
+                for (int j = 0; j < rearranged.length; j++) {
+                    String checkedPage = rearranged[j];
+                    if (rules.contains(currentPage + "|" + checkedPage) && i > j) {
+                        // swap
+                        swapPlaces(rearranged, i, j);
+                        swapped = true;
+                        break;
+                    }
+                }
+                if (swapped) {
+                    break;
+                }
+            }
+        }
+    }
+
+    private void swapPlaces(String[] array, int i, int j) {
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 
     private SortedManuals sortManualsByValidity(Set<String> rules, List<String> manuals) {
@@ -78,23 +79,12 @@ public class Day05 {
         return new SortedManuals(validPages, invalidPages);
     }
 
-    private boolean checkIfManualIsValid(Set<String> rules, String[] pageNumbers) {
-        for (int i = 0; i < pageNumbers.length; i++) {
-            String currentPage = pageNumbers[i];
+    private boolean checkIfManualIsValid(Set<String> rules, String[] manual) {
+        for (int i = 0; i < manual.length; i++) {
+            String currentPage = manual[i];
             if (rules.stream().anyMatch(x -> x.startsWith(currentPage))) {
-                for (int j = 0; j < pageNumbers.length; j++) {
-                    boolean contains = rules.contains(currentPage + "|" + pageNumbers[j]);
-                    if (!contains) {
-                        continue;
-                    }
-                    boolean isForward = false;
-                    if (i < j) {
-                        isForward = true;
-                    } else if (i == j) {
-                        continue;
-                    }
-
-                    if (!isForward) {
+                for (int j = 0; j < manual.length; j++) {
+                    if (rules.contains(currentPage + "|" + manual[j]) && i > j) {
                         return false;
                     }
                 }
