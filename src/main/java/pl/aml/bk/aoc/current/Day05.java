@@ -13,8 +13,8 @@ public class Day05 {
 
     public void part1() {
         Set<String> rules = loadRules("/inputs/day05_rules.txt");
-        List<String> pages = loadManuals("/inputs/day05_manuals.txt");
-        List<String> validManuals = sortManualsByValidity(rules, pages).validManuals;
+        List<String> manuals = loadManuals("/inputs/day05_manuals.txt");
+        List<String> validManuals = sortManualsByValidity(rules, manuals).validManuals;
         int sum = 0;
         for (var manual : validManuals) {
             String[] split = manual.split(",");

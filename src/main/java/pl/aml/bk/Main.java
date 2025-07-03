@@ -1,21 +1,21 @@
 package pl.aml.bk;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.aml.bk.aoc.current.Day02;
-import pl.aml.bk.aoc.current.Day03;
-import pl.aml.bk.aoc.current.Day04;
-import pl.aml.bk.aoc.current.Day05;
+import pl.aml.bk.aoc.current.*;
+
+import java.math.BigInteger;
+import java.util.stream.Stream;
 
 @Slf4j
 public class Main {
 
 
     public static void main(String[] args) {
-        day02();
-        day03();
-        day04();
-        day05();
+        Stream<Integer> numStream = Stream.of(10, 20, 30);
+        numStream.map(n -> n + 10).peek(s -> System.out.print(s));
+        numStream.forEach(s -> System.out.println(s));
     }
+
 
     private static void day05() {
         Day05 day05 = new Day05();
